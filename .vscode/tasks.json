@@ -1,0 +1,35 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            // minikube start with ingress
+            "label": "minikube-start",
+            "type": "shell",
+            "command": "minikube start --addons=ingress",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            // minikube tunnel  
+            "label": "minikube-tunnel",
+            "type": "shell",
+            "command": "minikube tunnel",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            // minikube reset
+            "label": "minikube-reset",
+            "type": "shell",
+            "command": "minikube delete --all",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
