@@ -7,4 +7,14 @@ layout:
 - go.kubebuilder.io/v4
 projectName: k8sop
 repo: github.com/kallepan/k8sop
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: server.io
+  group: batch
+  kind: CronJob
+  path: github.com/kallepan/k8sop/api/v1alpha1
+  version: v1alpha1
 version: "3"
