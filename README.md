@@ -13,26 +13,28 @@ minikube start && minikube addons enable ingress
 
 ### Create a New Operator
 
-This guide was taken from [here](https://book.kubebuilder.io/quick-start.html#create-a-project). The following commands will create a new operator project with the name `k8sop` and the group `batch` with the kind `CronJob`. The user name is set to `kallepan`. The API kind is set to `K8sop`.
+This guide was adapted from [here](https://book.kubebuilder.io/quick-start.html#create-a-project).
 
 ```bash
 # set the environment variables
 export OPERATOR_NAME=k8sop
-export OPERATOR_GROUP=webapp
 export USER_NAME=kallepan
-export DOMAIN=server.io
+export DOMAIN=server.io 
 
-export BATCH=batch
+export GROUP=batch
 export KIND=CronJob
 
 # create a new directory for the project
 mkdir -p project && cd project
 
 # initialize the project
-kubebuilder init --repo github.com/$USER_NAME/$OPERATOR_NAME --domain server.io --owner $USER_NAME --project-name $OPERATOR_NAME
+kubebuilder init --repo github.com/$USER_NAME/$OPERATOR_NAME --domain $DOMAIN --owner $USER_NAME --project-name $OPERATOR_NAME
 
 # create the API
-kubebuilder create api --version v1alpha1 --group $OPERATOR_GROUP --kind $KIND
+kubebuilder create api --version v1alpha1 --group $GROUP --kind $KIND
+
+# create the webhook
+kubebuilder create webhook --group $GROUP --version v1alpha1 --kind $KIND --defaulting --programmatic-validation
 
 # generate the manifests
 make manifests
